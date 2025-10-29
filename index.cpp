@@ -49,7 +49,7 @@ float getFloatValue() {
     string input;
     float value;
     while (true) {
-        cout << "Введіть дробове число: ";
+        cout << "Введіть дробове число (обов’язково з крапкою): ";
         getline(cin, input);
 
         if (input.empty()) {
@@ -57,11 +57,17 @@ float getFloatValue() {
             continue;
         }
 
+        // Перевірка на наявність крапки
+        if (input.find('.') == string::npos) {
+            cout << "Помилка: потрібно ввести саме дробове число (з крапкою)!\n";
+            continue;
+        }
+
         istringstream iss(input);
         if (iss >> value && iss.eof())
             return value;
-        else
-            cout << "Помилка: введіть коректне дробове число (використовуйте крапку для відокремлення дробової частини)!\n";
+
+        cout << "Помилка: введіть коректне дробове число!\n";
     }
 }
 
